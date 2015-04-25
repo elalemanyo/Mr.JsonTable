@@ -1,5 +1,4 @@
 (function ($) {
-
     $.fn.mrjsontablecolumn = function (options) {
         var thisSelector = this.selector;
         var opt = $.extend({}, $.fn.mrjsontablecolumn.defaults, options);
@@ -51,7 +50,7 @@
 
         $theadRow.appendTo($thead);
         $thead.appendTo($table);
-        
+
         var pagingNeeded = false;
         $.each(opts.data, function (index, item) {
             var $tr = $("<tr>").attr("data-i", index);
@@ -63,7 +62,7 @@
 
             $.each(opts.columns, function (c_index, c_item) {
 
-                var $td = $("<td>").text(item[c_item.data]).attr("data-i", c_index);
+                var $td = $("<td>").html(item[c_item.data]).attr("data-i", c_index);
 
                 if (c_item.starthidden) {
                     $td.hide();
@@ -73,7 +72,7 @@
             });
             $tr.appendTo($table);
         });
-                
+
         $mrjsontableContainer.append($visibleColumnsCBList);
         $mrjsontableContainer.append($table);
 
@@ -89,7 +88,7 @@
 
         return this.append($mrjsontableContainer);
     };
-    
+
     $.fn.mrjsontable.defaults = {
         cssClass: "table",
         columns: [],
@@ -99,7 +98,7 @@
         onHiddenCBChange: function () {
             var $thisGrid = $(this).parents(".mrjt");
             var columIndex = $(this).attr("data-i");
-            
+
             if ($(this).is(":checked")) {
                 $("td[data-i='" + columIndex + "']", $thisGrid).show();
                 $("th[data-i='" + columIndex + "']", $thisGrid).show();
@@ -147,23 +146,23 @@
                 var value = null;
                 switch (type) {
                     case "string":
-                        value = item.text();
-                        break;
+                    value = item.text();
+                    break;
                     case "int":
-                        value = parseInt(item.text());
-                        break;
+                    value = parseInt(item.text());
+                    break;
 
                     case "float":
-                        value = parseFloat(item.text());
-                        break;
+                    value = parseFloat(item.text());
+                    break;
 
                     case "datetime":
-                        value = new Date(item.text());
-                        break;
+                    value = new Date(item.text());
+                    break;
 
                     default:
-                        value = item.text();
-                        break;
+                    value = item.text();
+                    break;
                 }
 
                 array.push({ tr_id: tr_id, val: value });
@@ -172,17 +171,17 @@
             if (direction == "A") {
                 array.sort(function (a, b) {
                     if (a.val > b.val) { return 1 }
-                    if (a.val < b.val) { return -1 }
-                    return 0;
-                });
+                        if (a.val < b.val) { return -1 }
+                            return 0;
+                    });
                 $thisGrid.attr("data-so", "D");
             } else {
 
                 array.sort(function (a, b) {
                     if (a.val < b.val) { return 1 }
-                    if (a.val > b.val) { return -1 }
-                    return 0;
-                });
+                        if (a.val > b.val) { return -1 }
+                            return 0;
+                    });
 
                 $thisGrid.attr("data-so", "A");
             }
@@ -191,7 +190,7 @@
                 var td = $("tr[data-i='" + array[i].tr_id + "']", $thisGrid)
 
                 td.detach();
-                
+
                 $("tbody", $thisGrid).append(td);
             }
 
@@ -202,5 +201,5 @@
             return false;
         }
     };
-    
+
 }(jQuery));
